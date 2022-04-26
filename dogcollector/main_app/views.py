@@ -1,8 +1,21 @@
+from dataclasses import fields
 from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Dog
 
+class DogCreate(CreateView):
+    model = Dog
+    fields = '__all__'
+
+class DogUpdate(UpdateView):
+    model = Dog
+    fields = ['breed', 'description', 'age']
+
+class DogDelete(DeleteView):
+    model = Dog
+    success_url = '/dogs/'
 
 def home(request):
     return HttpResponse('<h1>hello world</h1>')
